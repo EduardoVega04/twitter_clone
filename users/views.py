@@ -1,10 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.template import context
 from django.urls import reverse
 from django.contrib.auth.models import User
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
-from django.contrib.auth.decorators import login_required
 
 
 def register(request):
@@ -34,7 +32,6 @@ def profile(request, username):
     return render(request, 'users/profile.html', context=ctx)
 
 
-@login_required
 def profileUpdate(request, username):
     requested_profile = get_object_or_404(User, username=username)
 
