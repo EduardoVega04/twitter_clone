@@ -2,7 +2,7 @@
 {% load humanize %}
 {% load mptt_tags %}
 
-<article class="post-object feed"
+<article id="tweet_id_{{ node.id }}" class="post-object feed"
     onclick="location.href = `{% url 'users:post-detail' node.author.username node.id %}`">
     <div class="post-author-image">
         <img class="author-pic" src="{{ node.author.profile.profile_pic.url }}" alt="User profile picture">
@@ -21,14 +21,16 @@
                         <img src="{% static 'blog/img/three_dots.svg' %}" alt="Post options">
                     </button>
                     <ul class="dropdown-menu">
-                        <li class="delete-option">
-                            <img src="{% static 'blog/img/delete_tweet.svg' %}" alt="Delete tweet">
-                            <span>Delete</span>
-                        </li>
-                        <li class="pin-option">
-                            <img src="{% static 'blog/img/pin_tweet.svg' %}" alt="Pin Tweet">
-                            <span>Pin to your profile</span>
-                        </li>
+                        {% if request.user.id == node.author.id %}
+                            <li class="delete-option" onclick="delete_post(`{% url 'users:delete-post' node.author.username node.id %}`)">
+                                <img src="{% static 'blog/img/delete_tweet.svg' %}" alt="Delete tweet">
+                                <span>Delete</span>
+                            </li>
+                            <li class="pin-option">
+                                <img src="{% static 'blog/img/pin_tweet.svg' %}" alt="Pin Tweet">
+                                <span>Pin to your profile</span>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>

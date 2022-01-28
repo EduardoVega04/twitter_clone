@@ -9,7 +9,7 @@
             {% include "blog/tweet_element.html" %}
         </div>
     {% endfor %}
-    <article class="post-object-detail"
+    <article id="tweet_id_{{ node.id }}" class="post-object-detail"
         onclick="location.href = `{% url 'users:post-detail' node.author.username node.id %}`">
         <div class="post-author-detail-info">
             <div class="post-author-image">

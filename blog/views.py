@@ -1,6 +1,9 @@
+from multiprocessing import context
 from django.contrib.auth.models import User
+from django.http import JsonResponse, HttpResponseForbidden
 from django.urls import reverse
 from django.shortcuts import redirect, render, get_object_or_404
+from django.views.decorators.http import require_http_methods
 from .models import Post
 from .forms import PostCreation
 
@@ -51,6 +54,18 @@ def post_detail(request, username, post_id):
     }
 
     return render(request, 'blog/post_detail.html', context=ctx)
+
+
+@require_http_methods(["POST"])
+def delete_post(request, username, post_id):
+    requested_user = get_object_or_404(User, username=username)
+    requested_post = get_object_or_404(Post, id=post_id)
+
+    if request.user == requested_user:
+        requested_post.delete()
+        return JsonResponse({'deleted': post_id})
+    else:
+        return HttpResponseForbidden()
 
 
 def about(request):
