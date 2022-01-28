@@ -139,6 +139,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Change default successfull login redirect to the blog's homepage
 LOGIN_REDIRECT_URL = 'blog:blog-home'
 
+LOGIN_URL = 'login'
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media')
 
@@ -149,3 +151,4 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+

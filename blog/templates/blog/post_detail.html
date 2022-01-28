@@ -69,7 +69,9 @@
             </div>
         </div>
     </article>
-    {% include "blog/newPost.html" %}
+    {% if user.is_authenticated %}
+        {% include "blog/newPost.html" %}
+    {% endif %}
     {% for node in node.get_children %}
         <div class="child">
             {% include "blog/tweet_element.html" %}
