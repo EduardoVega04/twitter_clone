@@ -43,7 +43,7 @@
     padding: 15px;
 }
 
-.edit-btn {
+.edit-btn, .unfollow-btn {
     display: block;
     margin-left: auto;
     width: 110px;
@@ -60,6 +60,46 @@
 
 .edit-btn:hover {
     background-color: rgb(224, 224, 224);
+    color: var(--font-color);
+}
+
+.unfollow-btn:hover {
+    color: rgb(244, 33, 46);
+    border-color: rgb(255, 221, 237);
+    background-color: rgba(244, 33, 46, 0.1);
+}
+
+.unfollow-btn::after {
+    content: "Following";
+}
+
+.unfollow-btn:hover::after {
+    content: "";
+}
+
+.unfollow-btn:hover::before {
+    content: "Unfollow";
+}
+
+.follow-btn {
+    display: block;
+    margin-left: auto;
+    width: 85px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    padding: 6px 0px 6px 0px;
+    border: 1px solid var(--font-color);
+    border-radius: 20px;
+    background-color: var(--font-color);
+}
+
+.follow-btn:hover {
+    background-color: rgb(39, 44, 48);
+    color: rgb(255, 255, 255);
+    border-color: rgb(39, 44, 48);
 }
 
 .user-names {
@@ -91,6 +131,10 @@
     color: var(--font-color);
     font-size: 15px;
     font-weight: 700;
+}
+
+.followers {
+    margin-left: 20px;
 }
 
 .user-location-joinDate {

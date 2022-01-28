@@ -44,3 +44,4 @@ class Post(MPTTModel):
             return self.content[:15]
         else:
             return "No content"
+

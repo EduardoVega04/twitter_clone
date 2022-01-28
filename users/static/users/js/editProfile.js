@@ -2,6 +2,7 @@ const editProfileModal = document.getElementById('editProfileModal');
 const profile_pic = document.getElementById("id_profile_pic");
 const cover_pic = document.getElementById("id_cover_pic");
 
+
 if (editProfileModal) {
     editProfileModal.addEventListener("hide.bs.modal", function (event) {
         let redirectURL = document.getElementsByClassName("btn-close")[0];

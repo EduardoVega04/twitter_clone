@@ -17,7 +17,15 @@
         <img src="{{ requested_profile.profile.profile_pic.url }}" alt="User profile picture">
     </div>
     <div class="profile-info">
-        <a href="{% url 'users:profile-update' requested_profile.username %}" class="edit-btn">Edit profile</a>
+        {% if request.user == requested_profile %}
+            <a href="{% url 'users:profile-update' requested_profile.username %}" class="edit-btn">Edit profile</a>
+        {% else %}
+            {% if requested_profile.profile not in request.user.profile.following.all %}
+                <a href="{% url 'blog:follow-user' requested_profile.username %}" class="follow-btn" onclick="handleFollowings(`{% url 'blog:follow-user' requested_profile.username %}`)">Follow</a>
+            {% else %}
+                <a href="{% url 'blog:follow-user' requested_profile.username %}" class="unfollow-btn" onclick="handleFollowings(`{% url 'blog:follow-user' requested_profile.username %}`)"></a>
+            {% endif %}
+        {% endif %}
         <div class="user-names">
             <h2 class="profile-username">{{requested_profile.first_name}} {{requested_profile.last_name}}</h2>
             <p class="profile-name profInfo">@{{requested_profile.username}}</p>
@@ -32,7 +40,7 @@
             <span class="joinDate profInfo">Joined {{requested_profile.date_joined|date:"F Y"}}</span>
         </div>
         <div class="following-followers">
-            <p><span class="followingInfo">X</span> <span class="profInfo">following</span> <span class="followingInfo">Y</span> <span class="profInfo">followers</span></p>
+            <p><span class="followingInfo following">{{ requested_profile.profile.following.all|length }}</span> <span class="profInfo">following</span> <span class="followingInfo followers">{{ requested_profile.profile.followers.all|length }}</span> <span class="profInfo">followers</span></p>
         </div>
     </div>
 </section>
