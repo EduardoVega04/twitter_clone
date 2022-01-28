@@ -1,0 +1,100 @@
+:root {
+    --twitter-blue: rgb(29, 155, 240);
+    --twitter-blue-hover: rgb(27, 138, 212);
+    --font-color: rgb(15, 20, 25);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.modal-title {
+    color: var(--font-color);
+    line-height: 28px;
+    font-size: 21px;
+    font-weight: 630;
+}
+
+#modalHeader {
+    border: 0px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+}
+
+#modalHeader button {
+    margin-left: 0;
+}
+
+#modalHeader img {
+    margin: 0 calc(50% - 35px);
+}
+
+#modalContent {
+    width: 43vw;
+    height: 75vh;
+    border-radius: 15px;
+}
+
+#modalBody {
+    padding: 0px 100px 0px 100px;
+}
+
+form div {
+    margin-top: 20px;
+}
+
+.modal-footer {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 0px 100px 16px 100px;
+    border: 0;
+}
+
+.signUpInvitation, .signUpLink {
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.signUpInvitation {
+    color: rgb(83, 100, 113);
+}
+
+.signUpLink {
+    text-decoration: none;
+}
+
+#paswdRestoreBtn {
+    width: 85%;
+    border-radius: 20px;
+    border: 1px solid rgb(207, 217, 222);
+    padding: .375rem .75rem;
+    color: var(--font-color);
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: 15px;
+    color: var(--font-color);
+    font-weight: 600;
+}
+
+#paswdRestoreBtn:hover {
+    background-color: rgb(224, 224, 224);
+}
+
+#loginBtn {
+    width: 85%;
+    color: rgb(255, 255, 255);
+    background-color: var(--font-color);
+    border: 0;
+    border-radius: 20px;
+    padding: .375rem .75rem;
+    margin: 0 auto;
+}
+
+#loginBtn:hover {
+    background-color: rgb(33, 39, 46);
+}

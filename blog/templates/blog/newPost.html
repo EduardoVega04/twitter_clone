@@ -1,0 +1,27 @@
+{% load static %}
+
+<div class="post-tweet">
+    <div class="post-author-image">
+        <img src="{{ user.profile.profile_pic.url }}" alt="User profile picture">
+    </div>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="post-text">
+            <label for="{{ p_form.content.id_for_label }}"></label>
+            {{ p_form.content }}
+        </div>
+        <div class="post-media-files">
+            <button type="button" class="btn-close btn-close-white" id="cancelPostImg" aria-label="Close"></button>
+            <div class="spinner-border text-info" id="spinner_post_media" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div class="post-options">
+            <label for="{{ p_form.media.id_for_label }}">
+                <img src="{% static 'blog/img/card-image.svg' %}" alt="Media for post">
+            </label>
+            {{ p_form.media }}
+            <button type="submit" id="postTweetBtn" disabled>Tweet</button>
+        </div>
+    </form>
+</div>

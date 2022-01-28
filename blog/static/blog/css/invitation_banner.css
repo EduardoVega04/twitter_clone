@@ -1,0 +1,69 @@
+.not-loggedIn-user {
+    position: fixed;
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100vw;
+    background-color: var(--twitter-blue);
+    margin: 0px;
+    bottom: 0;
+    min-height: 10vh;
+}
+
+.invitation-banner-text {
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    left: 20%;
+    margin: 8px 0px 8px 0px;
+}
+
+.invitation-text1 {
+    margin: 0px;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    font-size: 23px;
+}
+
+.invitation-text2 {
+    margin: 0px;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.invitation-banner-buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    position: relative;
+    left: 58vw;
+}
+
+.logInBtn {
+    color: rgb(255, 255, 255);
+    margin-right: 12px;
+    border: 1px solid var(--border-color);
+    padding: 8px 20px 8px 20px;
+}
+
+.logInBtn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.registerBtn {
+    background-color: var(--border-color);
+    color: var(--font-color);
+    padding: 9px 20px 9px 20px;
+}
+
+.registerBtn:hover {
+    background-color: rgb(215, 219, 220);
+}
+
+.invitation-banner-buttons a {
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 700;
+}

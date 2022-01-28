@@ -1,0 +1,78 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% load humanize %}
+{% load mptt_tags %}
+
+{% block content %}
+    {% for node in node.get_ancestors %}
+        <div class="ancestor">
+            {% include "blog/tweet_element.html" %}
+        </div>
+    {% endfor %}
+    <article class="post-object-detail"
+        onclick="location.href = `{% url 'users:post-detail' node.author.username node.id %}`">
+        <div class="post-author-detail-info">
+            <div class="post-author-image">
+                <img class="author-pic" src="{{ node.author.profile.profile_pic.url }}" alt="User profile picture">
+            </div>
+            <div class="author-username">
+                <p>
+                    <a href="{% url 'users:profile' node.author.username %}">{{ node.author.first_name }} {{node.author.last_name}}</a>
+                    <span class="username-detail-view">@{{ node.author.username }}</span>
+                </p>
+                <div class="tweet-options" onclick="event.stopPropagation();">
+                    <div class="btn-group">
+                        <button type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{% static 'blog/img/three_dots.svg' %}" alt="Post options">
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="delete-option">
+                                <img src="{% static 'blog/img/delete_tweet.svg' %}" alt="Delete tweet">
+                                <span>Delete</span>
+                            </li>
+                            <li class="pin-option">
+                                <img src="{% static 'blog/img/pin_tweet.svg' %}" alt="Pin Tweet">
+                                <span>Pin to your profile</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post-content">
+            <div class="post-details detail-view">
+                {% if node.content %}
+                <span class="content-detail-view">{{ node.content }}</span>
+                {% endif %}
+    
+                {% if node.media %}
+                <img src="{{ node.media.url }}" alt="Post image" class="img-fluid post-media-img">
+                {% endif %}
+    
+                <a class="date-posted-detail-view" href="{% url 'users:post-detail' node.author.username node.id %}"
+                    title="{{node.date_posted}}">{{ node.date_posted|date:"g:i A" }} <span>&middot;</span>
+                    {{node.date_posted|date:"N j, Y" }}</a>
+            </div>
+            <div class="post-actions">
+                <div class="action">
+                    {% if node.get_children|length > 0 %}
+                    <span class="comment-counter">{{ node.get_children|length }}</span>
+                    {% endif %}
+                    <img src="{% static 'blog/img/reply.svg' %}" alt="Reply tweet">
+                </div>
+                <div class="action">
+                    <img src="{% static 'blog/img/retweet.svg' %}" alt="Reply tweet">
+                </div>
+                <div class="action">
+                    <img src="{% static 'blog/img/like.svg' %}" alt="Reply tweet">
+                </div>
+            </div>
+        </div>
+    </article>
+    {% include "blog/newPost.html" %}
+    {% for node in node.get_children %}
+        <div class="child">
+            {% include "blog/tweet_element.html" %}
+        </div>
+    {% endfor %}
+{% endblock content %}

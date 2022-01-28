@@ -1,0 +1,127 @@
+.post-object {
+    display: flex;
+    flex-flow: row nowrap;
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px 15px 5px 15px;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.feed:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.post-content {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100%;
+}
+
+.post-author-image {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.post-author-image img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.author-username {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+}
+
+.author-username p a {
+    text-decoration: none;
+}
+
+.author-username p {
+    margin-bottom: 3px;
+}
+
+.post-media-img {
+    margin-top: 13px;
+    border-radius: 15px;
+}
+
+.post-actions {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 85%;
+    margin: 10px auto 0px auto;
+}
+
+.action {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.action:hover {
+    background-color: rgb(218, 240, 255);
+    cursor: pointer;
+}
+
+.no-posts-welcome {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 60%;
+    margin: 40px auto 10px auto;
+}
+
+.no-posts-welcome p {
+    color: rgba(15, 20, 25, 0.6);
+    font-weight: 500;
+}
+
+.tweet-options {
+    margin-left: auto;
+}
+
+.btn-group button {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    background-color: rgb(255, 255, 255);
+}
+
+.btn-group button:hover {
+    background-color: rgb(218, 240, 255);
+}
+
+.dropdown-menu.show {
+    width: 200px;
+    padding: 0px;
+}
+
+.dropdown-menu.show li {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 15px;
+    padding: 15px;
+}
+
+.dropdown-menu.show li:hover {
+    background-color: rgb(218, 240, 255);
+}
+
+.delete-option {
+    color: rgb(244, 33, 46);
+}
+

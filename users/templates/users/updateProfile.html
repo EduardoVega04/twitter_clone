@@ -1,0 +1,48 @@
+{% extends "users/profile.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block modal %}
+<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="{% url 'users:profile' requested_profile.username %}" role="button" class="btn-close" aria-label="Close"></a>
+                <h2 class="modal-title">Edit profile</h2>
+                <button type="submit" form="editForm" class="saveBtn">Save</button>
+            </div>
+            <div class="edit-profile">
+                <div class="opaque-div-profile"></div>
+                <div class="spinner-border text-info" id="spinner_profile" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <label for="{{ p_form.profile_pic.id_for_label }}" id="add_profile_label">
+                    <img src="{% static 'users/img/plus-circle.svg' %}" alt="Upload profile pic">
+                </label>
+                <img class="edit-profile-photo" src="{{ requested_profile.profile.profile_pic.url }}" alt="User profile picture">
+            </div>
+            <div class="edit-cover">
+                <div class="opaque-div-cover"></div>
+                <div class="spinner-border text-info" id="spinner_cover" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <label for="{{ p_form.cover_pic.id_for_label }}" id="add_cover_label">
+                    <img src="{% static 'users/img/plus-circle.svg' %}" alt="Upload profile pic">
+                </label>
+                <img class="edit-cover-photo" src="{{ requested_profile.profile.cover_pic.url }}" alt="User header picture">
+            </div>
+            <div class="modal-body">
+                <div class="edit-profile-forms">
+                    <form enctype="multipart/form-data" method="post" action="{% url 'users:profile-update' user.username %}" id="editForm">
+                        {% csrf_token %}
+                        {{u_form|crispy}}
+                        {{ p_form.bio|as_crispy_field }}
+                        {{ p_form.profile_pic }}
+                        {{ p_form.cover_pic }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock modal %}

@@ -1,0 +1,164 @@
+*:hover {
+    transition-duration: 300ms;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.header-element a {
+    text-decoration: none;
+    color: var(--font-color);
+}
+
+.header-option {
+    font-size: 20px;
+    color: var(--font-color);
+    font-weight: 400;
+}
+
+.header-element img {
+    width: 25px;
+    height: 25px;
+}
+
+.tweet-button {
+    background-color: var(--twitter-blue);
+    border: 0px;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    font-size: 15px;
+}
+
+@media (min-width: 992px) {
+    .header-element {
+        padding: 15px 20px 15px 20px;
+        margin-bottom: 5px;
+        border-radius: 50px;
+    }
+
+    .header-element a {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        gap: 17px;
+    }
+
+    .clone-logo {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-self: flex-start;
+        padding: 5px 10px 5px 10px;
+        margin-left: 23%;
+        margin-bottom: 10px;
+        border-radius: 50px;
+    }
+
+    .header-element:hover, .clone-logo:hover {
+        display: inline-block; 
+    }
+
+    .clone-logo:hover {
+        background-color: rgb(218, 240, 255);
+    }
+
+    .header-element:hover {
+        background-color: rgb(224, 224, 224);
+    }
+
+    .tweet-button {
+        width: 75%;
+        padding: 18px;
+        border-radius: 30px;
+        margin-top: 10px;
+    }
+
+    .tweet-button:hover {
+        background-color: var(--twitter-blue-hover);
+    }
+
+    .logout {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 90%;
+        border-radius: 50px;
+        margin-top: auto;
+        margin-bottom: 30px;
+        padding: 10px 0px 10px 0px;
+        gap: 10px;
+    }
+
+    .logout:hover {
+        background-color: rgb(224, 224, 224);
+    }
+
+    .logout:hover {
+        transition-duration: 200ms;
+    }
+
+    .logout-userInfo {
+        display: flex;
+        flex-flow: column nowrap;
+    }
+
+    .user-username {
+        color: var(--font-color);
+        font-weight: 700;
+        font-size: 15px;
+    }
+
+    .user-name {
+        color: rgb(83, 100, 113);
+        font-weight: 400;
+        font-size: 15px;
+    }
+
+    .logout-avatar {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logout-avatar img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .three-dots {
+        margin-left: 15px;
+        margin-bottom: 10px;
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    .hidden-popup {
+        display: none;
+    }
+
+    .logout-popup {
+        width: 18vw;
+        position: absolute;
+        margin-top: auto;
+        bottom: 15vh;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 0 5px #888;
+    }
+
+    .logout-popup:hover {
+        box-shadow: 0 0 7px rgb(122, 122, 122);
+    }
+
+    .logout-popup a {
+        text-decoration: none;
+    }
+}

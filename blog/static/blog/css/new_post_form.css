@@ -1,0 +1,99 @@
+.post-tweet {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    padding: 0px 15px 0px 15px;
+    gap: 10px;
+    border-bottom: 1px solid rgb(239, 243, 244);
+}
+
+form {
+    display: flex;
+    width: 100%;
+    flex-flow: column nowrap;
+}
+
+.post-text textarea {
+    width: 100%;
+    margin-bottom: 5px;
+    border: none;
+    outline: none;
+    resize: none;
+}
+
+.post-text textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    opacity: 1; /* Firefox */
+    font-weight: 500;
+    font-size: 20px;
+    color: rgba(15, 20, 25, 0.6);
+}
+
+.post-media-files {
+    margin-bottom: 25px;
+    position: relative;
+    display: none;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.post-media-files img {
+    border-radius: 15px;
+}
+
+
+label[for="id_content"] {
+    display: none;
+}
+
+.post-options {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: 20px;
+    height: 58px;
+    border-top: 1px solid rgb(239, 243, 244);
+}
+
+label[for="id_media"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+label[for="id_media"]:hover {
+    background-color: rgb(218, 240, 255);
+}
+
+label[for="id_media"] img {
+    width: 20px;
+    height: 20px;
+}
+
+#cancelPostImg {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+#postTweetBtn {
+    margin-left: auto;
+    margin-right: 5px;
+    border-radius: 20px;
+    border: none;
+    background-color: var(--twitter-blue);
+    padding: 5px 15px 5px 15px;
+    color: rgb(255, 255, 255);
+}
+
+#postTweetBtn:disabled, #postTweetBtn:disabled:hover {
+    background-color: rgba(29, 155, 240, 0.4);
+}
+
+
+#postTweetBtn:hover {
+    background-color: var(--twitter-blue-hover);
+}

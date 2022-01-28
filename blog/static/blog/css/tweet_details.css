@@ -1,0 +1,40 @@
+.post-object-detail {
+    display: flex;
+    flex-flow: column nowrap;
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px;
+    gap: 10px;
+}
+
+.post-author-detail-info {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 10px;
+}
+
+.username-detail-view {
+    display: block;
+    width: 100%;
+}
+
+.content-detail-view {
+    font-size: 24px;
+}
+
+.date-posted-detail-view {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.detail-view {
+    border-bottom: 1px solid var(--border-color);
+}
+
+#conversation-line {
+    border-left: 3px solid rgb(207, 217, 222);
+    border-radius: 25px;
+    position: absolute;
+}

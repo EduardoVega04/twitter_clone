@@ -1,0 +1,60 @@
+:root {
+    --border-color: rgb(239, 243, 244);
+    --twitter-blue: rgb(29, 155, 240);
+    --twitter-blue-hover: rgb(27, 138, 212);
+    --font-color: rgb(15, 20, 25);
+}
+
+* {
+    transition-duration: 200ms;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    line-height: 24px;
+    font-size: 20px;
+    color: var(--font-color);
+    font-weight: 700;
+    margin-left: 15px;
+    margin-bottom: 0px;
+    padding-top: 8px;
+}
+
+/* Style for large screens */
+@media (min-width: 992px) {
+    .main {
+        display: flex;
+        flex-flow: row nowrap;
+    }
+
+    header {
+        width: 23%;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        position: fixed;
+        height: 100vh;
+        padding-top: 10px;
+    }
+
+    .content {
+        width: 45%;
+        border-left: 1px solid var(--border-color);
+        border-right: 1px solid var(--border-color);
+        margin-left: auto;
+    }
+
+    .page-indicator {
+        height: 53px;
+        line-height: 16px;
+    }
+
+    .related {
+        padding-top: 10px;
+        width: 32%;
+    }
+}

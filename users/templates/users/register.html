@@ -1,0 +1,81 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'users/css/register.css' %}">
+    <title>It's what's happening</title>
+</head>
+<body>
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" id="modalContent">
+                <div class="modal-header" id="modalHeader">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <img src="{% static 'blog/img/twitter_clone_logo.svg' %}" alt="Twitter clone logo" height="35" width="35">
+                </div>
+                <div class="modal-body">
+                    <span class="modal-title" id="staticBackdropLabel">Create your account</span>
+                    <form method="post" id="registerForm">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                    </form>
+                </div>
+                <div class="modal-footer" id="modalFooter">
+                    <button type="submit" form="registerForm" id="registerBtn">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of modal -->
+
+    <div class="registration">
+        <section class="registration-banner">
+            <img class="logo" src="{% static 'users/img/twitter_clone_logo_white.svg' %}" alt="White logo" height="500" width="500">
+        </section>
+        <section class="registration-form">
+            <div>
+                <img src="{% static 'blog/img/twitter_clone_logo.svg' %}" alt="Twitter clone logo" height="60" width="60">
+            </div>
+            <div class="registration-headings">
+                <h1>It's what's happening</h1>
+                <h2>Join today</h2>
+            </div>
+            <div>
+                <button type="button" id="openModalBtn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Sign Up
+                </button>
+            </div>
+            <div class="loginOption">
+                <h3>Already have an account?</h3>
+                <a class="loginBtn" href="{% url 'login' %}">Log in</a>
+            </div>
+        </section>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    {% for field in form %}
+        {% if field.errors %}
+            <script>
+                var myModal = new bootstrap.Modal(document.getElementById("staticBackdrop"), {
+                    keyboard: false
+                });
+                myModal.show();
+
+                var btn = document.getElementsByClassName("btn-close")[0];
+                btn.onclick = function(){
+                    myModal.hide();
+                };
+            </script>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>

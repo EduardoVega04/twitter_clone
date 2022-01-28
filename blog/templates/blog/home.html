@@ -1,0 +1,18 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% load humanize %}
+{% load mptt_tags %}
+
+{% block content %}
+    {% include "blog/newPost.html" %}
+    {% if nodes %}
+        {% recursetree nodes %}
+            {% include "blog/tweet_element.html" %}
+        {% endrecursetree %}
+    {% else %}
+        <div class="no-posts-welcome">
+            <h3>Welcome to Twitter Clone!</h3>
+            <p>This is the best place to see what’s happening in your world</p>
+        </div>
+    {% endif %}
+{% endblock content %}
