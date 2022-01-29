@@ -24,12 +24,11 @@ def home(request):
         'nodes': Post.objects.all(),
         'p_form': p_form
     } 
-    
+
     return render(request, 'blog/home.html', context=ctx)
 
 
 def post_detail(request, username, post_id):
-    requested_user = get_object_or_404(User, username=username)
     requested_post = get_object_or_404(Post, id=post_id)
 
     if request.method == 'POST':
@@ -59,31 +58,42 @@ def post_detail(request, username, post_id):
 
 @require_http_methods(["POST"])
 def delete_post(request, username, post_id):
-    requested_user = get_object_or_404(User, username=username)
     requested_post = get_object_or_404(Post, id=post_id)
 
-    if request.user == requested_user:
+    if requested_post.author == request.user:
         requested_post.delete()
         return JsonResponse({'deleted': post_id})
     else:
         return HttpResponseForbidden()
 
 
+@require_http_methods(["POST"])
+def pin_unpin_tweet(request, username, post_id):
+    requested_post = get_object_or_404(Post, id=post_id)
+
+    if requested_post not in request.user.post_set.all():
+        return HttpResponseForbidden()
+    elif requested_post in request.user.post_set.all():
+        request.user.pinned_tweet = requested_post
+    else:
+        request.user.pinned_tweet = None
+
+    return JsonResponse({})
+
+
 @login_required
 def follow_user(request, followee):
-    requested_followee = get_object_or_404(User, username=followee)
-    requested_follower = get_object_or_404(User, id=request.user.id)
-    follower_profile = requested_follower.profile
-    followee_profile = requested_followee.profile
+    follower = get_object_or_404(User, id=request.user.id)
+    followee = get_object_or_404(User, username=followee)
 
-    if request.user == requested_followee:
-        pass
-    elif followee_profile not in follower_profile.following.all():
-        follower_profile.following.add(followee_profile)
+    if follower == followee:
+        return HttpResponseForbidden()
+    elif followee.profile not in follower.profile.following.all():
+        follower.profile.following.add(followee.profile)
     else:
-        follower_profile.following.remove(followee_profile)
+        follower.profile.following.remove(followee.profile)
 
-    return redirect(reverse('users:profile', args=(followee,)))
+    return JsonResponse({})
 
 
 def about(request):

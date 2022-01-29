@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from blog.models import Post
 from PIL import Image
 import os
 
@@ -25,11 +26,10 @@ class Profile(models.Model):
     profile_pic = models.ImageField(verbose_name="", default="default_profile_pic.jpg", upload_to=profile_pic_path)
     cover_pic = models.ImageField(verbose_name="", default="default_header_pic.png", upload_to=cover_pic_path)
     following = models.ManyToManyField('Profile', related_name='followers', blank=True)
-
+    pinned_tweet = models.OneToOneField(Post, null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return f'{self.user.username} Profile'
-
 
     # Override the super save() method. Save image and then resize and save it again
     def save(self, *args, **kwargs):
@@ -45,4 +45,3 @@ class Profile(models.Model):
         if cover_img.height > 1080 or cover_img.width > 1920:
             resized_cover_img = resize_image(cover_img, 1920)
             resized_cover_img.save(self.cover_pic.path)
-

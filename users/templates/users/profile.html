@@ -20,7 +20,7 @@
         {% if request.user == requested_profile %}
             <a href="{% url 'users:profile-update' requested_profile.username %}" class="edit-btn">Edit profile</a>
         {% else %}
-            {% if requested_profile.profile not in request.user.profile.following.all %}
+            {% if not user.is_authenticated or requested_profile.profile not in request.user.profile.following.all %}
                 <a href="{% url 'blog:follow-user' requested_profile.username %}" class="follow-btn" onclick="handleFollowings(`{% url 'blog:follow-user' requested_profile.username %}`)">Follow</a>
             {% else %}
                 <a href="{% url 'blog:follow-user' requested_profile.username %}" class="unfollow-btn" onclick="handleFollowings(`{% url 'blog:follow-user' requested_profile.username %}`)"></a>
