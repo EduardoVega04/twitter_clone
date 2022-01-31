@@ -15,15 +15,10 @@ def post_media_path(instance, filename):
 class Post(MPTTModel):
     content = models.CharField(max_length=180, verbose_name="", blank=True, null=True)
     date_posted = models.DateTimeField(default=timezone.now)
-    num_comments = models.IntegerField(default=0, null=False, blank=False)
-    num_retweets = models.IntegerField(default=0, null=False, blank=False)
-    num_likes = models.IntegerField(default=0, null=False, blank=False)
     media = models.FileField(
         verbose_name="", blank=True, null=True, upload_to=post_media_path, validators=[validate_file_type])
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    parent = TreeForeignKey(
-        'self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
-
+    author = models.ForeignKey('users.Profile', on_delete=models.CASCADE)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
 
     class MPTTMeta:
         order_insertion_by = ['date_posted']
@@ -43,5 +38,16 @@ class Post(MPTTModel):
         if self.content:
             return self.content[:15]
         else:
-            return "No content"
+            return "Default title"
 
+
+class Retweet(models.Model):
+    related_post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    author = models.ForeignKey('users.Profile', on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(default=timezone.now)
+
+
+class Like(models.Model):
+    related_post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    author = models.ForeignKey('users.Profile', on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(default=timezone.now)

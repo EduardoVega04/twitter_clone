@@ -26,7 +26,7 @@
                                 <img src="{% static 'blog/img/delete_tweet.svg' %}" alt="Delete tweet">
                                 <span>Delete</span>
                             </li>
-                            <li class="pin-option">
+                            <li class="pin-option" onclick="pin_unpin_post(`{% url 'users:pin-unpin-post' node.author.username node.id %}`)">
                                 <img src="{% static 'blog/img/pin_tweet.svg' %}" alt="Pin Tweet">
                                 <span>Pin to your profile</span>
                             </li>

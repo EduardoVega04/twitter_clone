@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import Post
+from .models import Post, Retweet, Like
 from mptt.admin import MPTTModelAdmin
 
-# Register your models here.
+
 admin.site.register(Post, MPTTModelAdmin)
+admin.site.register(Retweet)
+admin.site.register(Like)

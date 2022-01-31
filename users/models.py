@@ -26,7 +26,7 @@ class Profile(models.Model):
     profile_pic = models.ImageField(verbose_name="", default="default_profile_pic.jpg", upload_to=profile_pic_path)
     cover_pic = models.ImageField(verbose_name="", default="default_header_pic.png", upload_to=cover_pic_path)
     following = models.ManyToManyField('Profile', related_name='followers', blank=True)
-    pinned_tweet = models.OneToOneField(Post, null=True, blank=True, on_delete=models.CASCADE)
+
 
     def __str__(self) -> str:
         return f'{self.user.username} Profile'
@@ -45,3 +45,11 @@ class Profile(models.Model):
         if cover_img.height > 1080 or cover_img.width > 1920:
             resized_cover_img = resize_image(cover_img, 1920)
             resized_cover_img.save(self.cover_pic.path)
+
+
+class HomeFeed(models.Model):
+    profile = models.OneToOneField(Profile, null=True, blank=True, on_delete=models.CASCADE, related_name='feed')
+    following_tweets = models.ManyToManyField(Post, blank=True, related_name='feeds_tweet')
+    following_retweets = models.ManyToManyField(Post, blank=True, related_name='feeds_retweet')
+    following_likes = models.ManyToManyField(Post, blank=True, related_name='feeds_like')
+    pinned_tweet = models.OneToOneField(Post, blank=True, null=True, on_delete=models.CASCADE)

@@ -1,6 +1,6 @@
-const csrftoken = getCookie('csrftoken');
+csrftoken = getCookie('csrftoken');
 
-function pin_post(url) {
+function pin_unpin_post(url) {
     const request = new Request(url, {
         method: 'POST',
         headers: { 'X-CSRFToken': csrftoken },

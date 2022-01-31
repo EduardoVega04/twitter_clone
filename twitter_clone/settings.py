@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
+    'api.apps.ApiConfig',
     'mptt'
 ]
 

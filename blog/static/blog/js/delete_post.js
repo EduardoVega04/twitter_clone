@@ -1,5 +1,4 @@
-const csrftoken = getCookie('csrftoken');
-
+csrftoken = getCookie('csrftoken');
 
 function delete_post(url) {
     const request = new Request(url, {
