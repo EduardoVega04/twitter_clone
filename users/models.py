@@ -48,8 +48,14 @@ class Profile(models.Model):
 
 
 class HomeFeed(models.Model):
-    profile = models.OneToOneField(Profile, null=True, blank=True, on_delete=models.CASCADE, related_name='feed')
-    following_tweets = models.ManyToManyField(Post, blank=True, related_name='feeds_tweet')
-    following_retweets = models.ManyToManyField(Post, blank=True, related_name='feeds_retweet')
-    following_likes = models.ManyToManyField(Post, blank=True, related_name='feeds_like')
+    profile = models.OneToOneField(Profile, null=True, blank=True, on_delete=models.CASCADE, related_name='homefeed')
+    following_tweets = models.ManyToManyField(Post, blank=True, related_name='profile_feeds_tweet')
+    following_retweets = models.ManyToManyField(Post, blank=True, related_name='profile_feeds_retweet')
+    following_likes = models.ManyToManyField(Post, blank=True, related_name='profile_feeds_like')
+
+
+class ProfileFeed(models.Model):
+    profile = models.OneToOneField(Profile, null=True, blank=True, on_delete=models.CASCADE, related_name='profilefeed')
+    my_retweets = models.ManyToManyField(Post, blank=True, related_name='home_feeds_retweet')
+    my_likes = models.ManyToManyField(Post, blank=True, related_name='home_feeds_like')
     pinned_tweet = models.OneToOneField(Post, blank=True, null=True, on_delete=models.CASCADE)

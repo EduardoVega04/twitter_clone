@@ -4,52 +4,54 @@
 {% load mptt_tags %}
 
 {% block pageindicator %}
-    <h1>{{ requested_profile.first_name }}</h1>
-    <span class="tweet-indicator">{{ total_tweets }} tweets</span>
+    <h1>{{ requested_profile.user.first_name }}</h1>
+    <span class="tweet-indicator">{{ nodes|length }} tweets</span>
 {% endblock pageindicator %}
 
 {% block content %}
 <section class="user-profile">
     <div class="user-header-photo">
-        <img src="{{ requested_profile.profile.cover_pic.url }}" alt="User header picture">
+        <img src="{{ requested_profile.cover_pic.url }}" alt="User header picture">
     </div>
     <div class="user-profile-photo">
-        <img src="{{ requested_profile.profile.profile_pic.url }}" alt="User profile picture">
+        <img src="{{ requested_profile.profile_pic.url }}" alt="User profile picture">
     </div>
     <div class="profile-info">
-        {% if request.user == requested_profile %}
-            <a href="{% url 'users:profile-update' requested_profile.username %}" class="edit-btn">Edit profile</a>
+        {% if request.user.profile == requested_profile %}
+            <a href="{% url 'users:profile-update' requested_profile.user.username %}" class="edit-btn">Edit profile</a>
         {% else %}
-            {% if not user.is_authenticated or requested_profile.profile not in request.user.profile.following.all %}
-                <a href="{% url 'blog:follow-user' requested_profile.username %}" class="follow-btn" onclick="handleFollowings(`{% url 'blog:follow-user' requested_profile.username %}`)">Follow</a>
+            {% if not user.is_authenticated or requested_profile not in request.user.profile.following.all %}
+                <button class="follow-btn" onclick="handleFollow(`{% url 'api:follow-user' requested_profile.id %}`)">Follow</button>
             {% else %}
-                <a href="{% url 'blog:follow-user' requested_profile.username %}" class="unfollow-btn" onclick="handleFollowings(`{% url 'blog:follow-user' requested_profile.username %}`)"></a>
+                <button class="unfollow-btn" onclick="handleFollow(`{% url 'api:follow-user' requested_profile.id %}`)"></button>
             {% endif %}
         {% endif %}
         <div class="user-names">
-            <h2 class="profile-username">{{requested_profile.first_name}} {{requested_profile.last_name}}</h2>
-            <p class="profile-name profInfo">@{{requested_profile.username}}</p>
+            <h2 class="profile-username">{{requested_profile.user.first_name}} {{requested_profile.user.last_name}}</h2>
+            <p class="profile-name profInfo">@{{requested_profile.user.username}}</p>
         </div>
         <div class="user-bio">
-            {% if requested_profile.profile.bio %}
-                <pre>{{requested_profile.profile.bio}}</pre>
+            {% if requested_profile.bio %}
+                <pre>{{requested_profile.bio}}</pre>
             {% endif %}
         </div>
         <div class="user-location-joinDate">
             <img src="{% static 'users/img/calendar.svg' %}" alt="Calendar icon"> 
-            <span class="joinDate profInfo">Joined {{requested_profile.date_joined|date:"F Y"}}</span>
+            <span class="joinDate profInfo">Joined {{requested_profile.user.date_joined|date:"F Y"}}</span>
         </div>
         <div class="following-followers">
-            <p><span class="followingInfo following">{{ requested_profile.profile.following.all|length }}</span> <span class="profInfo">following</span> <span class="followingInfo followers">{{ requested_profile.profile.followers.all|length }}</span> <span class="profInfo">followers</span></p>
+            <p><span class="followingInfo following">{{ requested_profile.following.all|length }}</span> <span class="profInfo">following</span> <span class="followingInfo followers">{{ requested_profile.followers.all|length }}</span> <span class="profInfo">followers</span></p>
         </div>
     </div>
 </section>
 <section>
-    {% if nodes %}
-        {% recursetree nodes %}
-            {% include "blog/tweet_element.html" %}
-        {% endrecursetree %}
+    {% if node %}
+        <span>Pinned</span>
+        {% include "blog/tweet_element.html" %}
     {% endif %}
+    {% for node in nodes %}
+        {% include "blog/tweet_element.html" %}
+    {% endfor %}
 </section>
 
 {% block modal %}

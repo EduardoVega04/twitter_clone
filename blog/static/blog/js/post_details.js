@@ -1,5 +1,6 @@
 let ancestors = document.querySelectorAll(".ancestor");
 let children = document.querySelectorAll(".child");
+let detail = document.querySelector("article.post-object-detail");
 
 
 if (ancestors && ancestors.length > 0) {
@@ -18,9 +19,7 @@ if (ancestors && ancestors.length > 0) {
     }
 }
 
-if ((ancestors && ancestors.length > 0) || (children && children.length > 0)) {
-    console.log(ancestors);
-    console.log(children);
+if (detail) {
     document.querySelector(".post-tweet").style.paddingTop = "15px";
     let textAreaForm = document.getElementsByName("content")[0];
     textAreaForm.placeholder = "Tweet your reply";

@@ -1,6 +1,7 @@
 csrftoken = getCookie('csrftoken');
 
 function pin_unpin_post(url) {
+    document.querySelector(`#tweet_id_${url.split("/")[2]} .dropdown-menu`).style.display = "none";
     const request = new Request(url, {
         method: 'POST',
         headers: { 'X-CSRFToken': csrftoken },
@@ -10,7 +11,7 @@ function pin_unpin_post(url) {
     fetch(request).then(function (response) {
         return response.json();
     }).then(function (data) {
-        console.log(data.result);
+        window.location.reload();
     }).catch(function (reason) {
         console.log("Error");
     });

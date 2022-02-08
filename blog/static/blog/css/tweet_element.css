@@ -53,9 +53,14 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    justify-content: space-between;
+    gap: 150px;
     width: 85%;
     margin: 10px auto 0px auto;
+}
+
+.post-actions .action span {
+    position: absolute;
+    margin-left: 45px;
 }
 
 .action {
@@ -89,7 +94,7 @@
     margin-left: auto;
 }
 
-.btn-group button {
+#tweetOptionsBtn {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -101,7 +106,7 @@
     background-color: rgb(255, 255, 255);
 }
 
-.btn-group button:hover {
+#tweetOptionsBtn:hover {
     background-color: rgb(218, 240, 255);
 }
 
@@ -125,3 +130,10 @@
     color: rgb(244, 33, 46);
 }
 
+.liked {
+    color: rgb(249, 24, 128);
+}
+
+.retweeted {
+    color: rgb(0, 186, 124);
+}

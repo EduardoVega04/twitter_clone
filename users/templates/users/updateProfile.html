@@ -7,7 +7,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <a href="{% url 'users:profile' requested_profile.username %}" role="button" class="btn-close" aria-label="Close"></a>
+                <a href="{% url 'users:profile' request.user.username %}" role="button" class="btn-close" aria-label="Close"></a>
                 <h2 class="modal-title">Edit profile</h2>
                 <button type="submit" form="editForm" class="saveBtn">Save</button>
             </div>
@@ -19,7 +19,7 @@
                 <label for="{{ p_form.profile_pic.id_for_label }}" id="add_profile_label">
                     <img src="{% static 'users/img/plus-circle.svg' %}" alt="Upload profile pic">
                 </label>
-                <img class="edit-profile-photo" src="{{ requested_profile.profile.profile_pic.url }}" alt="User profile picture">
+                <img class="edit-profile-photo" src="{{ request.user.profile.profile_pic.url }}" alt="User profile picture">
             </div>
             <div class="edit-cover">
                 <div class="opaque-div-cover"></div>
@@ -29,11 +29,11 @@
                 <label for="{{ p_form.cover_pic.id_for_label }}" id="add_cover_label">
                     <img src="{% static 'users/img/plus-circle.svg' %}" alt="Upload profile pic">
                 </label>
-                <img class="edit-cover-photo" src="{{ requested_profile.profile.cover_pic.url }}" alt="User header picture">
+                <img class="edit-cover-photo" src="{{ request.user.profile.cover_pic.url }}" alt="User header picture">
             </div>
             <div class="modal-body">
                 <div class="edit-profile-forms">
-                    <form enctype="multipart/form-data" method="post" action="{% url 'users:profile-update' user.username %}" id="editForm">
+                    <form enctype="multipart/form-data" method="post" action="" id="editForm">
                         {% csrf_token %}
                         {{u_form|crispy}}
                         {{ p_form.bio|as_crispy_field }}
