@@ -56,7 +56,7 @@
                 {% endif %}
             </div>
             <div class="action retweet" onclick="event.stopPropagation(); retweet(`{% url 'api:retweet-post' node.id %}`);">
-                {% if user.is_authenticated and node in user.profile.profilefeed.my_retweets.all %}
+                {% if user.is_authenticated and node in user.profile.profilefeed.retweeted.all %}
                     {% if node.retweet_set.count > 0 %}
                         <span class="retweet-counter retweeted">{{ node.retweet_set.count }}</span>
                     {% endif %}
@@ -81,7 +81,7 @@
                 {% endif %}
             </div>
             <div class="action like" onclick="event.stopPropagation(); like(`{% url 'api:like-post' node.id %}`);">
-                {% if user.is_authenticated and node in user.profile.profilefeed.my_likes.all %}
+                {% if user.is_authenticated and node in user.profile.profilefeed.liked.all %}
                     {% if node.like_set.count > 0 %}
                         <span class="like-counter liked">{{ node.like_set.count }}</span>
                     {% endif %}

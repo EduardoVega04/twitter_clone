@@ -8,9 +8,18 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def home(request):
     p_form = PostCreation()
+    user_profile = request.user.profile
+    nodes = Post.objects.none()
+
+    for follower in user_profile.following.all():
+        nodes = nodes.union(
+            follower.profilefeed.retweeted.all(),
+            follower.profilefeed.liked.all(),
+            follower.post_set.all()
+        )
 
     ctx = {
-        'nodes': Post.objects.all(),
+        'nodes': nodes.order_by('-date_posted'),
         'p_form': p_form,
         'post_to': reverse('api:post')
     }
@@ -19,7 +28,6 @@ def home(request):
 
 
 def post_detail(request, username, post_id):
-    print(username)
     requested_post = get_object_or_404(Post, id=post_id)
     p_form = PostCreation()
 

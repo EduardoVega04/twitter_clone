@@ -27,10 +27,7 @@ def retweet_post(request, post_id):
     retweet, created = Retweet.objects.get_or_create(
         author=request.user.profile, related_post=requested_post)
 
-    if created:
-        request.user.profile.profilefeed.my_retweets.add(retweet.related_post)
-    else:
-        request.user.profile.profilefeed.my_retweets.remove(retweet.related_post)
+    if not created:
         retweet.delete()
 
     return JsonResponse({})
@@ -43,11 +40,8 @@ def like_post(request, post_id):
 
     like, created = Like.objects.get_or_create(
         author=request.user.profile, related_post=requested_post)
-
-    if created:
-        request.user.profile.profilefeed.my_likes.add(like.related_post)
-    else:
-        request.user.profile.profilefeed.my_likes.remove(like.related_post)
+    
+    if not created:
         like.delete()
 
     return JsonResponse({})
